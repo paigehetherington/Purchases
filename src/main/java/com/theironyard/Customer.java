@@ -11,15 +11,15 @@ import javax.persistence.Id;
 public class Customer {
     @Id
     @GeneratedValue
-
+    int id;
     String name;
     String email;
 
 
-    public Customer(String email, String name) {
-        this.email = email;
-        this.name = name;
-    }
+//    public Customer(String email, String name) {
+//        this.email = email;
+//        this.name = name;
+//    }
 
     public Customer() {
     }

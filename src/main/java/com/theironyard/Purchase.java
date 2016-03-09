@@ -9,8 +9,7 @@ import javax.persistence.*;
 public class Purchase {
     @Id
     @GeneratedValue
-
-    //int customerId;
+    int id;
 
     @Column(nullable = false)
     String date;
@@ -24,12 +23,12 @@ public class Purchase {
     @ManyToOne
     Customer customer;
 
-    public Purchase(String date, String creditCard, String cvv, String category) {
-        this.date = date;
-        this.creditCard = creditCard;
-        this.cvv = cvv;
-        this.category = category;
-    }
+//    public Purchase(String date, String creditCard, String cvv, String category) {
+//        this.date = date;
+//        this.creditCard = creditCard;
+//        this.cvv = cvv;
+//        this.category = category;
+//    }
 
     public Purchase() {
     }
