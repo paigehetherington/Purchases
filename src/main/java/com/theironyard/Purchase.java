@@ -21,7 +21,7 @@ public class Purchase {
     String category;
 
     @ManyToOne
-    Customer customer;
+    Customer customer; //for each person associate a customer with it (creates customer_id)
 
 //    public Purchase(String date, String creditCard, String cvv, String category) {
 //        this.date = date;

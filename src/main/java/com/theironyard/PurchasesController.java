@@ -27,8 +27,8 @@ public class PurchasesController {
 
     @PostConstruct
     public void init() throws FileNotFoundException {
-        if (customers.count() == 0) {
-            File f = new File("customers.csv");
+        if (customers.count() == 0) { //only runs once if empty
+            File f = new File("customers.csv"); //Scanner scanner = new Scanner(new File("customers.csv"));
             Scanner scanner = new Scanner(f);
             scanner.nextLine();
             while (scanner.hasNext()) {
@@ -57,7 +57,7 @@ public class PurchasesController {
                 p.category = (columns[4]);
 
                 int customerId = Integer.valueOf(columns[0]); //joining customer to purchases based on customerId
-                p.customer = customers.findOne(customerId);
+                p.customer = customers.findOne(customerId); //or Customer customer = customers.findOne(Integer.valueOf(columns[0]));
 
 
                 purchases.save(p);
@@ -71,12 +71,12 @@ public class PurchasesController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String home(Model model, String category) {
-
+        //can reduce duplication using:  List<Purchase> p;
 
         if (category != null) {
             model.addAttribute("purchases", purchases.findByCategory(category));
         } else {
-            model.addAttribute("purchases", purchases.findAll());
+            model.addAttribute("purchases", purchases.findAll()); //repository object, must do findAll to get the data, don't have to inject customers because comes with purchase object
         }
         return "home";
     }

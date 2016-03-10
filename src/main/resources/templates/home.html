@@ -3,7 +3,7 @@
 
 
 <a href="/">All</a>
-<a href="/?category=Furniture">Furniture</a>
+<a href="/?category=Furniture">Furniture</a> //pass category name to db, must match csv (capital F)
 <a href="/?category=Alcohol">Alcohol</a>
 <a href="/?category=Toiletries">Toiletries</a>
 <a href="/?category=Shoes">Shoes</a>
@@ -23,12 +23,12 @@
         <th>CVV</th>
         <th>Date</th>
     </tr>
-    {{#purchases}}
+    {{#purchases}} //list of purchase objects from the repo
 
 
 
     <tr>
-        {{#customer}}
+        {{#customer}} //within purchase object. could do {{customer.name}} {{customer.email}}
         <td>{{name}}</td>
         <td>{{email}}</td>
         {{/customer}}
