@@ -2,6 +2,8 @@ package com.theironyard;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,14 +72,25 @@ public class PurchasesController {
     }
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String home(Model model, String category) {
+    public String home(Model model, String category, Integer page) {  //Integer b/c option to not recieve
         //can reduce duplication using:  List<Purchase> p;
-
+        page = (page == null) ? 0 : page;
+        PageRequest pr = new PageRequest(page, 5); //if page zero makeit 0, otherwise return page, 20 on each page
+        Page<Purchase> p;
         if (category != null) {
-            model.addAttribute("purchases", purchases.findByCategory(category));
+            p = purchases.findByCategory(pr, category);
+
         } else {
-            model.addAttribute("purchases", purchases.findAll()); //repository object, must do findAll to get the data, don't have to inject customers because comes with purchase object
+            p = purchases.findAll(pr);
+
         }
+        model.addAttribute("purchases", p);
+        model.addAttribute("nextPage", page+1);
+        model.addAttribute("showNext", p.hasNext());
+        model.addAttribute("category", category);
+
+
+
         return "home";
     }
 
